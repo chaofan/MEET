@@ -4,19 +4,19 @@
       <%= link_to	image_tag("male.gif",:width=>80, :height=>80), profile_path(@user) %>
     </div>
     <div>
-      <% unless current_user?(@user) %>
-        <% unless Friendship.exists?(current_user, @user) %>
+      <% unless @user == @current_user %>
+        <% unless Friendship.exists?(@current_user, @user) %>
           <%= link_to "Add Friend", friendships_path(:friend_id=>@user),  :method=>:post %>
         <% end %>
-        <% if Friendship.connected?(@user, current_user) %>
-          <%= link_to "Remove Friend",  friendship_path(Friendship.conn(current_user, @user)),  :method=>:delete, :confirm=>"sure to delete?" %>
+        <% if Friendship.connected?(@user, @current_user) %>
+          <%= link_to "Remove Friend",  friendship_path(Friendship.conn(@current_user, @user)),  :method=>:delete, :confirm=>"sure to delete?" %>
         <% end %>
-        <% if Friendship.pending?(current_user, @user) %>
+        <% if Friendship.pending?(@current_user, @user) %>
           <li>
           <%= user_name(@user) %> has contacted you
           <br />
           (<%= link_to "confirm request", 
-           edit_friend_ship_path(Friendship.conn(current_user, @user)) %>)
+           edit_friend_ship_path(Friendship.conn(@current_user, @user)) %>)
            </li>
          <% end %>
          <% if Friendship.pending?(@user, current_user) %>

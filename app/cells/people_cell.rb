@@ -9,20 +9,72 @@ class PeopleCell < Cell::Rails
     render
   end
 
+  def friends
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+
+  def friends_birthday
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+  
+  def added_groups
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+
+  def promotional
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+
+  def recent_visits
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+
+  def message_center
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
+    render
+  end
+
   def other_people
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
     render
   end
 
   def personal_setting
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
     render
   end
 
   def current_people
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
+
     render
   end
 
   def personal_info
-    @user = User.find(params[:id])
+    @user = @opts[:user]
+    @current_user = @opts[:current_user]
 
     render
   end
@@ -44,7 +96,7 @@ class PeopleCell < Cell::Rails
   def requested_friends
     @current_user = @opts[:current_user]
     @requested_friends = Friendship.where("friend_id=? and status=?", @current_user, Friendship::REQUESTED)
-    
+
     render
   end
 

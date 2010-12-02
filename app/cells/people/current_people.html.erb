@@ -1,16 +1,16 @@
 <div id="p-info-all">
   <div id="p-info-left" class="left" style="width:580px;margin-left:5px;margin-right:5px;border-right:1px solid #DDDDDD;">
-    <%= render_cell :people,  :personal_info %>
-    <%= render_cell :people,  :promotional %>
-    <%= render_cell :people,  :message_center %>
-    <%= render_cell :people,  :network_activity %>
-    <%= render_cell :people,  :message_board %>
+    <%= render_cell :people,  :personal_info, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :promotional, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :message_center, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :network_activity, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :message_board, :current_user=>@current_user, :user=>@user %>
   </div>
 
   <div id="p-info-right" class="left" style="width:249px;">
-    <%= render_cell :people,  :recent_visits %>
-    <%= render_cell :people,  :friends %>
-    <%= render_cell :people,  :friends_birthday %>
-    <%= render_cell :people,  :added_groups %>
+    <%= render_cell :people,  :recent_visits, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :friends, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :friends_birthday, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :added_groups, :current_user=>@current_user, :user=>@user %>
   </div>
 </div>

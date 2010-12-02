@@ -3,7 +3,7 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= render  "current_people" %>
+  <%= render_cell :people, :current_people, :current_user=>current_user, :user=>@user %>
 <% else %>
-  <%= render  "other_people" %>
+  <%= render_cell :people,  :other_people, :current_user=>current_user, :user=>@user %>
 <% end %>
