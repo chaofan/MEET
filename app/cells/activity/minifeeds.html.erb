@@ -1,13 +1,11 @@
 <% @activities.each do |minifeed_item| %>
   <% unless minifeed_item.item.nil? %>
-    <li>
     <div class="profile-image">
-      <%= image_link minifeed_item.person %>
+      <% minifeed_item.user %>
     </div>
-    <p><%= minifeed_message minifeed_item %></p>
-    <p class="meta published">
+    <%= minifeed_item.item_id %>
+    <span class="meta published">
     <%= time_ago_in_words minifeed_item.created_at %> ago
-    </p>
-    </li>
+    </span>
   <% end %>
 <% end %>
