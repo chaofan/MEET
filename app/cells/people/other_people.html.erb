@@ -1,15 +1,15 @@
 <div id="p-info-all">
   <div id="p-info-left" class="left" style="width:580px;margin-left:5px;margin-right:5px;border-right:1px solid #DDDDDD;">
-    <%= render	"personal_info" %>
-    <%= render  "network_activity" %>
-    <%= render  "message_board" %>
+    <%= render_cell :people,  :personal_info, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :network_activity, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :message_board, :current_user=>@current_user, :user=>@user %>
   </div>
 
   <div id="p-info-right" class="left" style="width:249px;">
-    <%= render  "recent_visits" %>
-    <%= render  "friends" %>
-    <%= render  "friends_birthday" %>
-    <%= render  "added_groups" %>
+    <%= render_cell :people,  :recent_visits, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :friends, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :friends_birthday, :current_user=>@current_user, :user=>@user %>
+    <%= render_cell :people,  :added_groups, :current_user=>@current_user, :user=>@user %>
   </div>
 </div>
 

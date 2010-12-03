@@ -34,4 +34,9 @@ module ApplicationHelper
       return false
     end
   end
+
+  # Return true if a person is connected to (or is) the current person
+  def connected_to?(user)
+    current_user?(user) or Friendship.connected?(user, current_user)
+  end
 end

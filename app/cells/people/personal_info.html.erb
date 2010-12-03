@@ -19,7 +19,7 @@
            edit_friend_ship_path(Friendship.conn(@current_user, @user)) %>)
            </li>
          <% end %>
-         <% if Friendship.pending?(@user, current_user) %>
+         <% if Friendship.pending?(@user, @current_user) %>
            <%= user_name(@user) %>
          <% end %>
        <% end %>

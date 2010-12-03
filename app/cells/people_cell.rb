@@ -95,7 +95,7 @@ class PeopleCell < Cell::Rails
 
   def requested_friends
     @current_user = @opts[:current_user]
-    @requested_friends = Friendship.where("friend_id=? and status=?", @current_user, Friendship::REQUESTED)
+    @requested_friends = Friendship.where("user_id=? and status=?", @current_user, Friendship::REQUESTED)
 
     render
   end

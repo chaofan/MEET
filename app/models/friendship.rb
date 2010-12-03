@@ -1,8 +1,16 @@
+require 'activity_logger'
+
 class Friendship < ActiveRecord::Base
+  include ActivityLogger
+
   belongs_to :user
   belongs_to :friend, :class_name => 'User'    
 
   after_create :log_activity
+  
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy,
+                        :conditions => "item_type = 'Friendship'"
+  validates_presence_of :user_id, :friend_id
 
   def log_activity
     activity = Activity.create!(:item => self, :user => user)
@@ -34,10 +42,7 @@ class Friendship < ActiveRecord::Base
     alias exist? exists?
 
     # Make a pending connection request.
-    def request(user, friend, send_mail=nil)
-      #if send_mail.nil?
-      #  send_mail = !global_prefs.nil? && global_prefs.email_notifications? && contact.connection_notifications?
-      #end
+    def request(user, friend)
       if user == friend or Friendship.exists?(user, friend)
         nil
       else
@@ -45,12 +50,6 @@ class Friendship < ActiveRecord::Base
           create(:user => user, :friend => friend, :status => PENDING)
           create(:user => friend, :friend => user, :status => REQUESTED)
         end
-        #if send_mail
-        # The order here is important: the mail is sent *to* the friend,
-        # so the connection should be from the friend's point of view.
-        #  connection = conn(friend, user)
-        #  PersonMailer.deliver_connection_request(connection)
-        #end
         true
       end
     end
@@ -64,14 +63,14 @@ class Friendship < ActiveRecord::Base
       end
       # Exclude the first admin to prevent everyone's feed from
       # filling up with new registrants.
-      #unless [user, friend].include?(User.find_first_admin)
-      #  log_activity(conn(user, friend))
-      #end
+      unless [user, friend].include?(User.find_first_admin)
+        log_activity(conn(user, friend))
+      end
     end
 
-    def connect(user, friend, send_mail = nil)
+    def connect(user, friend)
       transaction do
-        request(user, friend, send_mail)
+        request(user, friend)
         accept(user, friend)
       end
       conn(user, friend)
