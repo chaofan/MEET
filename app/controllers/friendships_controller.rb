@@ -37,7 +37,7 @@
     logger.info("-------destroy-------------")
     @friendship.breakup
 
-    flash[:success] = "Ended connection with #{@friendship.friend.name}"
+    flash[:success] = "Ended connection with #{@friendship.friend.profile.name}"
     redirect_to people_path
   end  
 
@@ -91,9 +91,9 @@
   # Suppose Alice sends Bob a connection request, but then the admin 
   # deactivates Alice.  We don't want Bob to be able to make the connection.
   def redirect_for_inactive
-    if @friendship.friend.deactivated?
-      flash[:error] = "Invalid connection request: person deactivated"
-      redirect_to people_url
-    end
+    #if @friendship.friend.deactivated?
+    #  flash[:error] = "Invalid connection request: person deactivated"
+    #  redirect_to people_url
+    #end
   end
 end

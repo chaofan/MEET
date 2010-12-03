@@ -63,9 +63,9 @@ class Friendship < ActiveRecord::Base
       end
       # Exclude the first admin to prevent everyone's feed from
       # filling up with new registrants.
-      unless [user, friend].include?(User.find_first_admin)
-        log_activity(conn(user, friend))
-      end
+      #unless [user, friend].include?(User.find_first_admin)
+      #  log_activity(conn(user, friend))
+      #end
     end
 
     def connect(user, friend)

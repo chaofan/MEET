@@ -88,7 +88,7 @@ class PeopleCell < Cell::Rails
 
   def connected_friends
     @current_user = @opts[:current_user]
-    @connected_friends = Friendship.where("friend_id=? and status=?", @current_user, Friendship::ACCEPTED)
+    @connected_friends = Friendship.where("user_id=? and status=?", @current_user, Friendship::ACCEPTED)
 
     render
   end
