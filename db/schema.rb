@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130142953) do
+ActiveRecord::Schema.define(:version => 20101206132452) do
 
   create_table "activities", :force => true do |t|
     t.boolean  "public"
@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(:version => 20101130142953) do
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "course_categories", :force => true do |t|
@@ -151,6 +157,23 @@ ActiveRecord::Schema.define(:version => 20101130142953) do
 
   create_table "levels", :force => true do |t|
     t.string   "name",       :limit => 180
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "content"
+    t.integer  "parent_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "sender_deleted_at"
+    t.datetime "sender_read_at"
+    t.datetime "recipient_deleted_at"
+    t.datetime "recipient_read_at"
+    t.datetime "replied_at"
+    t.string   "type"
+    t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
