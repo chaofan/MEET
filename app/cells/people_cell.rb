@@ -1,11 +1,17 @@
+require 'activities_helper'
+
 class PeopleCell < Cell::Rails
   helper  ApplicationHelper
+  
+  helper ActivitiesHelper
 
   def message_board
     render
   end
 
   def network_activity
+    @activities = Activity.where("1=1").limit(5)
+
     render
   end
 

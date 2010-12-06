@@ -37,6 +37,9 @@
       account: "Account  帐户/课程管理"
       data_setting: "Data setting  信息设置"
       privacy_setting: "Privacy setting 隐私设置"
+    network_activity:
+      lecture_show: "#{username} 创建了 #{subject}."
+
   blogs:
     index:
       blog_list : "博客列表"

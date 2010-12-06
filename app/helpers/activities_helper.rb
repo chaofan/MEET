@@ -8,8 +8,6 @@ module ActivitiesHelper
       if recent
         %(new lecture #{lecture_link(lecture.title)})
       else
-        %(#{user_link_with_image(user)} made a lecture
-          #{lecture_link(lecture)})
       end
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
@@ -20,8 +18,10 @@ module ActivitiesHelper
     user = activity.user
     case activity_type(activity)
     when "Lecture"
-      %(#{lecture_link(user)}'s has created a new
-        #{lecture_link("lecture", activity.item)}.)
+      t(".lecture_show", :username=>user_name(user), :subject=>course_path(activity.item.course))
+      #%(#{user_name user} created #{course_path("lecture", activity.item)}.)
+    when "Course"
+      %()
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end

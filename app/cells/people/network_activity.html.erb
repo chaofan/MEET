@@ -2,5 +2,16 @@
   <h2 class="blue-title">
     <%= t(:title, :scope=>[:view, :personal, :_network_activity]) %>
   </h2>
-  <%= render_cell :activity,  :minifeeds %>
+
+  <% @activities.each do |minifeed_item| %>
+    <% unless minifeed_item.item.nil? %>
+      <div class="profile-image">
+        <% minifeed_item.user %>
+      </div>
+      <%= minifeed_message minifeed_item %>
+      <span class="meta published">
+        <%= time_ago_in_words minifeed_item.created_at %> ago
+      </span>
+    <% end %>
+  <% end %>
 </div>
