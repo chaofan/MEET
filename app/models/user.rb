@@ -28,13 +28,44 @@ class User < ActiveRecord::Base
       :conditions => "recipient_deleted_at IS NULL"
     end
 
+  # 定义一些常用的变量
   TRASH_TIME_AGO = 1.month.ago
+  MESSAGES_PER_PAGE = 5
+  NUM_RECENT_MESSAGES = 4
 
   def role_symbols  
     roles.map do |role|
       role.name.underscore.to_sym  
     end  
   end  
+
+  ## Message methods
+  def received_messages(page = 1)
+    _received_messages.paginate(:page => page, :per_page => MESSAGES_PER_PAGE)
+  end
+
+  def sent_messages(page = 1)
+    _sent_messages.paginate(:page => page, :per_page => MESSAGES_PER_PAGE)
+  end
+
+  def trashed_messages(page = 1)
+    conditions = [%((sender_id = :person AND sender_deleted_at > :t) OR
+                    (recipient_id = :person AND recipient_deleted_at > :t)),
+                    { :person => id, :t => TRASH_TIME_AGO }]
+                    order = 'created_at DESC'
+                    trashed = Message.paginate(:all, :conditions => conditions,
+                                               :order => order,
+                                               :page => page,
+                                               :per_page => MESSAGES_PER_PAGE)
+  end
+
+  def recent_messages
+    Message.find(:all,
+                 :conditions => [%(recipient_id = ? AND
+                                   recipient_deleted_at IS NULL), id],
+                                   :order => "created_at DESC",
+                                   :limit => NUM_RECENT_MESSAGES)
+  end
 
   protected
   def create_profile
