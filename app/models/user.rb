@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many  :roles, :through=>:assignments
 
+  with_options :class_name => "Message", :dependent => :destroy,
+    :order => 'created_at DESC' do |user|
+    user.has_many :_sent_messages, :foreign_key => "sender_id",
+      :conditions => "sender_deleted_at IS NULL"
+    user.has_many :_received_messages, :foreign_key => "recipient_id",
+      :conditions => "recipient_deleted_at IS NULL"
+    end
+
   TRASH_TIME_AGO = 1.month.ago
 
   def role_symbols  
