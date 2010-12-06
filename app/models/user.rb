@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many  :roles, :through=>:assignments
 
+  TRASH_TIME_AGO = 1.month.ago
+
   def role_symbols  
     roles.map do |role|
       role.name.underscore.to_sym  

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101206132452) do
+ActiveRecord::Schema.define(:version => 20101206133611) do
 
   create_table "activities", :force => true do |t|
     t.boolean  "public"
@@ -174,6 +174,14 @@ ActiveRecord::Schema.define(:version => 20101206132452) do
     t.datetime "replied_at"
     t.string   "type"
     t.integer  "conversation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "preferences", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
