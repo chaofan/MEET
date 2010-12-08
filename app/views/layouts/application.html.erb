@@ -10,14 +10,14 @@
   </head>
   <body>
     <div id="divHeader">
-      <%= render  "/shared/header" %>
+      <%= render_cell  :shared, :header, :current_user=>current_user %>
     </div>
 
     <div id="divall">
       <div id="sidebar_application">
-        <%= render_cell  :people, :personal_setting %>
-        <%= render  "/shared/application" -%>
-        <%= render  "/shared/admin_panel" -%>
+        <%= render_cell  :people, :personal_setting, :current_user=>current_user %>
+        <%= render_cell  :shared, :application %>
+        <%= render_cell  :shared, :admin_panel %>
       </div>
 
       <div id="main" style="width:842px;margin-left:-3px;">
@@ -29,7 +29,7 @@
     </div>
 
     <div id="footer">
-      <%= render  "shared/footer" %>
+      <%= render_cell  :shared, :footer %>
       <%= yield :footer %>
       <!--
       <script src="http://dict.cn/hc/" type="text/javascript"></script>

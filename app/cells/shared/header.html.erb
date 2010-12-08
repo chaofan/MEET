@@ -1,6 +1,6 @@
 <div id="app-menu">
   <ul>
-    <%= render  "/shared/nav_menu" %>
+    <%= render_cell  :shared, :nav_menu %>
   </ul>
 </div>
 
@@ -11,7 +11,7 @@
     </li>
     <li class="t_bar"></li>
     <li>
-    <%= link_to	raw(t(:my_meet, :scope=>[:view, :shared, :_header])), person_path(current_user) %>
+    <%= link_to	raw(t(:my_meet, :scope=>[:view, :shared, :_header])), person_path(@current_user) %>
     </li>
     <li class="t_bar"></li>
     <li class="notready">
@@ -26,3 +26,4 @@
     <%= link_to	raw(t(:logout, :scope=>[:view, :shared, :_header])), destroy_user_session_path %></li>
   </ul>
 </div> 
+
