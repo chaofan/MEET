@@ -2,8 +2,6 @@ class PeopleController < ApplicationController
   respond_to  :html, :js
 
   def show
-    logger.info("x"*40)
-    logger.info(params[:id])
     @user = User.find(params[:id])
 
     render
